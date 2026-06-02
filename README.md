@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FeedbackHub
 
-## Getting Started
+یک پلتفرم ساده برای دریافت تماس و بازخورد از کاربران، ساخته شده با Next.js 15.
 
-First, run the development server:
+## ویژگی‌ها
+
+- **فرم تماس**: با امکان ارسال پیام با استفاده از Server Actions
+- **فرم بازخورد**: با امتیازدهی ستاره‌ای و آپلود فایل
+- **اعتبارسنجی**: با استفاده از Zod و React Hook Form
+- **طراحی مدرن**: با Tailwind CSS
+- **TypeScript**: برای type safety
+
+## تکنولوژی‌های استفاده شده
+
+- **Next.js 15** (با App Router و Turbopack)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS 4**
+- **React Hook Form**
+- **Zod**
+- **Server Actions**
+
+## شروع کار
+
+ابتدا وابستگی‌ها را نصب کنید:
+
+```bash
+npm install
+```
+
+سپس سرور توسعه را اجرا کنید:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+برای ساخت پروژه برای پروداکشن:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+برای اجرای نسخه پروداکشن:
 
-## Learn More
+```bash
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## ساختار پروژه
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+├── components/       # کامپوننت‌های عمومی (Navbar, Footer)
+├── contact/          # صفحه و فرم تماس
+│   ├── ContactForm.tsx
+│   ├── actions.ts    # Server Actions
+│   └── page.tsx
+├── feedback/         # صفحه بازخورد
+│   └── page.tsx
+├── lib/              # انواع و اعتبارسنجی‌ها
+│   ├── types.ts
+│   └── validations.ts
+├── success/          # صفحه موفقیت
+│   └── page.tsx
+├── layout.tsx        # Layout اصلی
+└── page.tsx          # صفحه اصلی
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## لایسنس
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
