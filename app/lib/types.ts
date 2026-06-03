@@ -3,3 +3,8 @@ export type FormState = {
     message: string
     errors?: Record<string, string[]>
 }
+
+export type FileValidationResult = {
+    valid: boolean
+    error?: string
+}

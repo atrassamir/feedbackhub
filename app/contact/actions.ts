@@ -2,6 +2,7 @@
 
 import { contactSchema } from "../lib/validations";
 import { FormState } from "../lib/types";
+import { redirect } from "next/navigation";
 
 
 export async function submitContact(prevState: FormState, formData: FormData): Promise<FormState> {
@@ -32,8 +33,5 @@ export async function submitContact(prevState: FormState, formData: FormData): P
 
     console.log('داده دریافتی : ', result.data);
 
-    return {
-        success: true,
-        message: `ممنون ${result.data.name} پیامت دریافت شد`
-    };
+    redirect(`/success?type=contact&name=${encodeURIComponent(result.data.name)}`)
 }

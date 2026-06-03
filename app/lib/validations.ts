@@ -32,7 +32,8 @@ export const feedbackSchema = z.object({
         .max(5),
 
     category: z.enum(['bug', 'suggestion', 'question', 'other'], {
-        errorMap: () => ({ message: 'دسته بندی را انتخاب کنید' })
+        error: 'دسته بندی را انتخاب کنید'
+        // errorMap: () => ({ message: 'دسته بندی را انتخاب کنید' })
     }),
 
     description: z.string().min(20, 'توضیحات باید حداقل ۲۰ کاراکتر باشد').max(1000, 'توضیحات نباید بیشتر از ۱۰۰۰ کاراکتر باشد'),

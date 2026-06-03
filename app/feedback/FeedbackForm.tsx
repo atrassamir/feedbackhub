@@ -3,10 +3,11 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { feedbackSchema, FeedbackFormData } from '../lib/validations'
 import { submitFeedback } from './actions'
 import { FormState } from '../lib/types'
+import FileUpload from "../components/FileUpload"
 
 
 const categories = [
@@ -19,6 +20,7 @@ const categories = [
 
 export default function FeedbackForm() {
     const [formState, setFormState] = useState<FormState | null>(null);
+    const fileRef = useRef<File | null>(null)
 
     const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting } } = useForm<FeedbackFormData>(
         {
@@ -39,7 +41,12 @@ export default function FeedbackForm() {
 
 
     async function onSubmit(data: FeedbackFormData) {
-        const result = await submitFeedback(data);
+        const formData = new FormData();
+        if(fileRef.current) {
+            formData.append('screenshot', fileRef.current)
+        }
+
+        const result = await submitFeedback(data, formData);
         setFormState(result);
     }
 
@@ -149,6 +156,17 @@ export default function FeedbackForm() {
                     className="border border-gray-300 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:bg-gray-50 resize-none"
                 />
                 {errors.description && (<p className="text-red-500 text-xs">{errors.description.message}</p>)}
+            </div>
+
+
+            <div className="flex flex-col gap-1">
+                <label className="text-sm font-medium text-gray-700">
+                    تصویر (اختیاری)
+                </label>
+                <FileUpload
+                    onChange={(file) => { fileRef.current = file }}
+                    disabled={isSubmitting}
+                />
             </div>
 
 
