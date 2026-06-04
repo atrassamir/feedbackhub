@@ -6,6 +6,7 @@ import { feedbackSchema, FeedbackFormData } from "../lib/validations";
 import { FormState } from "../lib/types";
 import { validateFile, getFileExtension } from "../lib/fileHelpers";
 import { redirect } from "next/navigation";
+import { createFeedback } from "../lib/db/feedback";
 
 
 export async function submitFeedback(data:FeedbackFormData, formData: FormData): Promise<FormState> {
@@ -18,6 +19,7 @@ export async function submitFeedback(data:FeedbackFormData, formData: FormData):
     }
 
 
+    let screenshotPath: string | null = null
     const file = formData.get('screenshot') as File | null
 
 
@@ -37,11 +39,23 @@ export async function submitFeedback(data:FeedbackFormData, formData: FormData):
         const filePath = join(process.cwd(), 'public/uploads', fileName);
 
         await writeFile(filePath, buffer);
-        console.log('فایل ذخیره شده : ', fileName)
+        screenshotPath = `/uploads/${fileName}`;
     }
 
 
-    await new Promise((resolve) => setTimeout(resolve, 1200))
+    try {
+        await createFeedback({
+            name: result.data.name,
+            email: result.data.email,
+            rating: result.data.rating,
+            category: result.data.category,
+            description: result.data.description,
+            screenshot: screenshotPath,
+        })
+    } catch (error) {
+        console.error('خطا در ذخیره بازخورد:', error)
+        return { success: false, message: 'خطا در ذخیره بازخورد. لطفاً دوباره تلاش کنید.' }
+    }
 
 
     redirect(`/success?type=feedback&name=${encodeURIComponent(result.data.name)}`);
