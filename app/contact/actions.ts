@@ -1,8 +1,10 @@
 'use server'
 
+
 import { contactSchema } from "../lib/validations";
 import { FormState } from "../lib/types";
 import { redirect } from "next/navigation";
+import { createContact } from "../lib/db/contact";
 
 
 export async function submitContact(prevState: FormState, formData: FormData): Promise<FormState> {
@@ -23,15 +25,13 @@ export async function submitContact(prevState: FormState, formData: FormData): P
     };
 
 
-    // ── ۳. پردازش داده‌ها ──────────────────────────
-    // اینجا میتونی:
-    // - به دیتابیس ذخیره کنی
-    // - ایمیل بفرستی
-    // - هر کار دیگه‌ای بکنی
-    // فعلاً یه تاخیر مصنوعی میذاریم:
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+        await createContact(result.data)
+    } catch (error) {
+        console.log('خطا در ذخیره پیام', error)
+        return { success: false, message: 'خطا در ذخیره پیام. لطفا دوباره تلاش کنید'}
+    }
 
-    console.log('داده دریافتی : ', result.data);
 
     redirect(`/success?type=contact&name=${encodeURIComponent(result.data.name)}`)
 }
