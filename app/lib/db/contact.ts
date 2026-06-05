@@ -25,10 +25,11 @@ export async function getAllContacts() {
 }
 
 
-export async function makeContactAsRead(id: number) {
+export async function markContactAsRead(id: number) {
+    const contact = await prisma.contact.findUnique({ where: { id } })
     return prisma.contact.update({
         where: { id },
-        data: { isRead: true }
+        data: { isRead: !contact?.isRead }
     })
 }
 

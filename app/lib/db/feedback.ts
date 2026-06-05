@@ -33,9 +33,10 @@ export async function getAllFeedbacks() {
 
 
 export async function markFeedbackAsRead(id: number) {
+    const feedback = await prisma.feedback.findUnique({ where: { id } })
     return prisma.feedback.update({
         where: { id },
-        data: { isRead: true },
+        data: { isRead: !feedback?.isRead },
     })
 }
 

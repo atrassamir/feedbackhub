@@ -1,4 +1,5 @@
 import { getAllContacts } from '../../lib/db/contact'
+import ContactActions from '../components/ContactActions';
 import type { Metadata } from 'next'
 
 
@@ -62,17 +63,7 @@ export default async function AdminContactPage() {
                                 </div>
 
                                 {/* وضعیت */}
-                                <div className="flex-shrink-0">
-                                    {contact.isRead ? (
-                                        <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
-                                            خوانده شده
-                                        </span>
-                                    ) : (
-                                        <span className="text-xs text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
-                                            جدید
-                                        </span>
-                                    )}
-                                </div>
+                                <ContactActions id={contact.id} isRead={contact.isRead} />
 
                             </div>
                         </div>

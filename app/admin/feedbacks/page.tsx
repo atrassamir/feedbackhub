@@ -1,4 +1,5 @@
 import { getAllFeedbacks } from '../../lib/db/feedback'
+import FeedbackActions from '../components/FeedbackActions'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 
@@ -96,17 +97,7 @@ export default async function AdminFeedbacksPage() {
                                 </div>
 
                                 {/* وضعیت */}
-                                <div className="flex-shrink-0">
-                                    {feedback.isRead ? (
-                                        <span className="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">
-                                            خوانده شده
-                                        </span>
-                                    ) : (
-                                        <span className="text-xs text-purple-600 bg-purple-50 px-3 py-1 rounded-full">
-                                            جدید
-                                        </span>
-                                    )}
-                                </div>
+                                <FeedbackActions id={feedback.id} isRead={feedback.isRead} />
 
                             </div>
                         </div>
