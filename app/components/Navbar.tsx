@@ -9,6 +9,7 @@ const links = [
   { href: '/', label: 'خانه' },
   { href: '/contact', label: 'تماس با ما' },
   { href: '/feedback', label: 'ارسال بازخورد' },
+  { href: '/admin', label: '⚙️ ادمین' },
 ]
 
 
