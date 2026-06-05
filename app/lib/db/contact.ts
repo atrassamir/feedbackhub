@@ -18,7 +18,7 @@ export async function createContact(data: CreateContactInput) {
 }
 
 
-export async function getAllContact() {
+export async function getAllContacts() {
     return prisma.contact.findMany({
         orderBy: { createdAt: 'desc' }
     })
