@@ -28,6 +28,25 @@
 npm install
 ```
 
+فایل environment بساز
+```bash
+cp .env.example .env
+```
+فایل `.env` رو باز کن و مقادیر رو پر کن.
+
+
+دیتابیس رو بساز
+```bash
+npx prisma migrate dev
+npx prisma generate
+```
+
+پوشه uploads بساز
+```bash
+mkdir -p public/uploads
+```
+
+
 سپس سرور توسعه را اجرا کنید:
 
 ```bash
@@ -44,26 +63,6 @@ npm run build
 
 ```bash
 npm start
-```
-
-## ساختار پروژه
-
-```
-app/
-├── components/       # کامپوننت‌های عمومی (Navbar, Footer)
-├── contact/          # صفحه و فرم تماس
-│   ├── ContactForm.tsx
-│   ├── actions.ts    # Server Actions
-│   └── page.tsx
-├── feedback/         # صفحه بازخورد
-│   └── page.tsx
-├── lib/              # انواع و اعتبارسنجی‌ها
-│   ├── types.ts
-│   └── validations.ts
-├── success/          # صفحه موفقیت
-│   └── page.tsx
-├── layout.tsx        # Layout اصلی
-└── page.tsx          # صفحه اصلی
 ```
 
 ## لایسنس
