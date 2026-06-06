@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { markContactAsRead, deleteContact } from "../lib/db/contact"
 import { markFeedbackAsRead, deleteFeedback } from "../lib/db/feedback"
-
+import { signOut } from "@/auth"
 
 export async function toggleContactRead(id: number, isRead: boolean) {
     try {
@@ -51,3 +51,8 @@ export async function removeFeedback(id: number) {
         throw new Error('خطا در حذف بازخورد')
     }
 };
+
+
+export async function logoutAction() {
+    await signOut({ redirectTo: '/login' })
+}
